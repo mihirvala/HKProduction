@@ -27,7 +27,7 @@ const services = [
 
 const ServicesSection: React.FC = () => {
   return (
-    <section id="services" className="py-24 md:py-32 px-5 sm:px-8 bg-surface-soft">
+    <section id="services" className="py-24 md:py-32 px-5 sm:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -71,8 +71,25 @@ const ServicesSection: React.FC = () => {
                     className="w-full aspect-[4/3] object-cover"
                   />
                 ) : (
-                  <div className="w-full aspect-[4/3] flex items-center justify-center">
-                    <i className="fas fa-box-open text-4xl text-gold-300" />
+                  // No product photographs to show yet — a designed panel reads as a
+                  // deliberate choice, where a bare icon reads as a broken image.
+                  <div className="relative w-full aspect-[4/3] flex flex-col items-center justify-center gap-3 bg-gold-50 overflow-hidden">
+                    {/* faint diagonal hatching for texture */}
+                    <div
+                      className="absolute inset-0 opacity-[0.5]"
+                      style={{
+                        backgroundImage:
+                          'repeating-linear-gradient(45deg, transparent 0 10px, rgba(199,160,79,0.10) 10px 11px)'
+                      }}
+                      aria-hidden="true"
+                    />
+                    <span className="relative w-14 h-14 rounded-full bg-white/70 border border-gold-200 flex items-center justify-center">
+                      <i className="fas fa-camera-retro text-xl text-gold-500" />
+                    </span>
+                    <span className="relative text-[11px] font-semibold uppercase tracking-eyebrow text-gold-600">
+                      Samples on request
+                    </span>
+                    <span className="relative w-8 h-px bg-gold-300" aria-hidden="true" />
                   </div>
                 )}
               </div>

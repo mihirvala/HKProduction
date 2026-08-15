@@ -29,7 +29,7 @@ const shots: Shot[] = [
 
 const PortfolioSection: React.FC = () => {
   return (
-    <section id="portfolio" className="py-24 md:py-32 px-5 sm:px-8 bg-white">
+    <section id="portfolio" className="py-24 md:py-32 px-5 sm:px-8 bg-surface-soft">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 28 }}

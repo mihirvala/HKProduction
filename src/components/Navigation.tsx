@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const navItems = ['Home', 'Services', 'Portfolio', 'Pricing', 'About'];
+const navItems = ['Home', 'Services', 'Portfolio', 'Album', 'Pricing', 'About'];
 
 const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
