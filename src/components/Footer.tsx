@@ -1,150 +1,109 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
 
-interface FooterProps {
-  isDarkMode: boolean;
-}
+const PHONE = '917778979768';
+const EMAIL = 'patelkuldip379@gmail.com';
 
-const Footer: React.FC<FooterProps> = ({ isDarkMode }) => {
+const quickLinks = [
+  { name: 'Home', href: '#home' },
+  { name: 'Services', href: '#services' },
+  { name: 'Pricing', href: '#pricing' },
+  { name: 'About Us', href: '#about' },
+  { name: 'Contact', href: '#contact' }
+];
+
+const Footer: React.FC = () => {
   const openWhatsApp = () => {
-    const phoneNumber = '+917778979768';
-    const message = encodeURIComponent('Hi, I\'m interested in your photography services');
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    const message = encodeURIComponent("Hi, I'm interested in your photography services");
+    window.open(`https://wa.me/${PHONE}?text=${message}`, '_blank', 'noopener');
   };
 
   const openInstagram = () => {
-    window.open('https://instagram.com/hk_weddingstudio', '_blank');
+    window.open('https://instagram.com/hk_weddingstudio', '_blank', 'noopener');
   };
 
-  // Add creator credit dynamically to make it non-modifiable
-  useEffect(() => {
-    const encodedName = 'TWloaXIgVmFsYQ==';
-    const creatorText = `Created by ${atob(encodedName)}`;
-    
-    // Find the copyright element and add creator credit after it
-    const copyrightElement = document.querySelector('.footer-copyright');
-    if (copyrightElement && !copyrightElement.nextElementSibling?.classList.contains('creator-credit')) {
-      const creatorElement = document.createElement('p');
-      creatorElement.className = `text-xs mt-2 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'} creator-credit`;
-      creatorElement.textContent = creatorText;
-      copyrightElement.parentNode?.insertBefore(creatorElement, copyrightElement.nextSibling);
-    }
-  }, [isDarkMode]);
-
-  const quickLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Services', href: '#services' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'About Us', href: '#about' },
-    { name: 'Contact', href: '#contact' }
-  ];
-
   return (
-    <footer className={`py-12 px-4 ${isDarkMode ? 'bg-gray-900 border-t border-gray-800' : 'bg-gray-800 border-t border-gray-700'}`}>
+    <footer className="bg-white border-t border-surface-border px-5 sm:px-8 pt-16 pb-10">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Left Column - Brand */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center space-x-2 mb-4">
-              <i className={`fas fa-camera text-lg ${isDarkMode ? 'text-white' : 'text-gray-100'}`}></i>
-              <span className={`font-bold text-lg ${
-                isDarkMode ? 'text-white' : 'text-gray-100'
-              }`}>HK Production</span>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 pb-12">
+          {/* Brand */}
+          <div>
+            <div className="flex items-center gap-2.5 mb-4">
+              <i className="fas fa-camera text-gold-500" />
+              <span className="font-display text-lg font-semibold text-ink">
+                HK Production
+              </span>
             </div>
-            <p className={`text-sm mb-4 ${
-              isDarkMode ? 'text-gray-400' : 'text-gray-300'
-            }`}>
-              Capturing timeless moments
+            <p className="text-sm text-ink-muted leading-relaxed max-w-xs">
+              Capturing timeless wedding stories with artistry and precision.
             </p>
-            <p className={`text-xs footer-copyright ${
-              isDarkMode ? 'text-gray-500' : 'text-gray-400'
-            }`}>
-              © 2026 HK Production. All rights reserved.
-            </p>
-          </motion.div>
+          </div>
 
-          {/* Middle Column - Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            <h3 className={`text-lg font-semibold mb-4 ${
-              isDarkMode ? 'text-white' : 'text-gray-100'
-            }`}>
+          {/* Quick links */}
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-ink mb-5">
               Quick Links
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className={`text-sm transition-colors duration-200 ${
-                      isDarkMode 
-                        ? 'text-gray-400 hover:text-white' 
-                        : 'text-gray-300 hover:text-gray-100'
-                    }`}
+                    className="text-sm text-ink-muted hover:text-gold-600 transition-colors"
                   >
                     {link.name}
                   </a>
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
-          {/* Right Column - Connect */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <h3 className={`text-lg font-semibold mb-4 ${
-              isDarkMode ? 'text-white' : 'text-gray-100'
-            }`}>
+          {/* Connect */}
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-ink mb-5">
               Connect
             </h3>
-            <div className="space-y-3 mb-6">
-              <div className={`flex items-center space-x-2 text-sm ${
-                isDarkMode ? 'text-gray-400' : 'text-gray-300'
-              }`}>
-                <i className="fas fa-envelope"></i>
-                <span>patelkuldip379@gmail.com</span>
-              </div>
-              <div className={`flex items-center space-x-2 text-sm ${
-                isDarkMode ? 'text-gray-400' : 'text-gray-300'
-              }`}>
-                <span>📞</span>
-                <span>+91 7778979768</span>
-              </div>
-            </div>
-            <div className="flex space-x-3">
-              <motion.button
+            <ul className="space-y-3 mb-6">
+              <li>
+                <a
+                  href={`mailto:${EMAIL}`}
+                  className="text-sm text-ink-muted hover:text-gold-600 transition-colors break-all"
+                >
+                  {EMAIL}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`tel:+${PHONE}`}
+                  className="text-sm text-ink-muted hover:text-gold-600 transition-colors"
+                >
+                  +91 77789 79768
+                </a>
+              </li>
+            </ul>
+            <div className="flex gap-3">
+              <button
                 onClick={openWhatsApp}
-                className="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center hover:bg-green-600 transition-colors"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                title="WhatsApp"
+                className="w-9 h-9 rounded-full border border-surface-border text-ink-muted hover:text-white hover:bg-[#25D366] hover:border-[#25D366] flex items-center justify-center transition-colors"
+                aria-label="Contact us on WhatsApp"
               >
-                <i className="fab fa-whatsapp"></i>
-              </motion.button>
-              <motion.button
+                <i className="fab fa-whatsapp" />
+              </button>
+              <button
                 onClick={openInstagram}
-                className="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 text-white rounded-full flex items-center justify-center hover:from-purple-700 hover:to-pink-700 transition-all"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                title="Instagram"
+                className="w-9 h-9 rounded-full border border-surface-border text-ink-muted hover:text-white hover:bg-gradient-to-br hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF] hover:border-transparent flex items-center justify-center transition-colors"
+                aria-label="Visit our Instagram"
               >
-                <i className="fab fa-instagram"></i>
-              </motion.button>
+                <i className="fab fa-instagram" />
+              </button>
             </div>
-          </motion.div>
+          </div>
+        </div>
+
+        <div className="pt-7 border-t border-surface-border flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-ink-light">
+            © {new Date().getFullYear()} HK Production. All rights reserved.
+          </p>
+          <p className="text-xs text-ink-light">Created by Mihir Vala</p>
         </div>
       </div>
     </footer>

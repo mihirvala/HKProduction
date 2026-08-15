@@ -1,430 +1,104 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import OptimizedImage from './OptimizedImage';
+import React from 'react';
+import { motion } from 'framer-motion';
 
-interface ServicesSectionProps {
-  isDarkMode: boolean;
-}
+const services = [
+  {
+    title: 'Bridal Photography',
+    description:
+      'Portrait sessions that hold the detail of the day — the jewellery, the mehndi, the quiet moment before it all begins.',
+    cover: '/portfolio/bridal-garden',
+    points: ['Traditional & candid portraits', 'Studio and on-location', 'Retouched and album ready']
+  },
+  {
+    title: 'Couple Photography',
+    description:
+      'Candid and cinematic coverage of the two of you, from the pre-wedding shoot through to the last dance.',
+    cover: '/portfolio/couple-peach',
+    points: ['Pre-wedding shoots', 'Cinematic highlights & teaser', 'Drone coverage available']
+  },
+  {
+    title: 'Product Photography',
+    description:
+      'Clean, commercial product shots for catalogues, listings and campaigns — styled, lit and retouched in studio.',
+    cover: null,
+    points: ['Catalogue & listing images', 'Styled studio lighting', 'Bulk shoot pricing']
+  }
+];
 
-const ServicesSection: React.FC<ServicesSectionProps> = ({ isDarkMode }) => {
-  const [selectedService, setSelectedService] = useState<string | null>(null);
-  const [visibleImages, setVisibleImages] = useState<number>(4);
-
-  // Memoized photo arrays for better performance
-  const bridalPhotos = useMemo(() => [
-    '/photos/bridal/IMG_0889.JPG.jpeg',
-    '/photos/bridal/IMG_1407.JPG.jpeg',
-    '/photos/bridal/IMG_1420.JPG.jpeg',
-    '/photos/bridal/IMG_1424.JPG.jpeg',
-    '/photos/bridal/IMG_1427.JPG.jpeg',
-    '/photos/bridal/IMG_1468.JPG.jpeg',
-    '/photos/bridal/IMG_1471.JPG.jpeg',
-    '/photos/bridal/IMG_1472.JPG.jpeg',
-    '/photos/bridal/IMG_3007.JPG.jpeg',
-    '/photos/bridal/IMG_3008.JPG.jpeg',
-    '/photos/bridal/IMG_3010.JPG.jpeg',
-    '/photos/bridal/IMG_3011.JPG.jpeg',
-    '/photos/bridal/IMG_3013.JPG.jpeg',
-    '/photos/bridal/IMG_3014.JPG.jpeg',
-    '/photos/bridal/IMG_4146.JPG.jpeg',
-    '/photos/bridal/IMG_4295.JPG.jpeg',
-    '/photos/bridal/IMG_4296.JPG.jpeg',
-    '/photos/bridal/IMG_4298.JPG.jpeg',
-    '/photos/bridal/IMG_4303.JPG.jpeg',
-    '/photos/bridal/IMG_4306.JPG.jpeg',
-    '/photos/bridal/IMG_4308.JPG.jpeg',
-    '/photos/bridal/IMG_4344.JPG.jpeg',
-    '/photos/bridal/IMG_4345.JPG.jpeg',
-    '/photos/bridal/IMG_4346.JPG.jpeg',
-    '/photos/bridal/IMG_4374.JPG.jpeg',
-    '/photos/bridal/IMG_4379.JPG.jpeg',
-    '/photos/bridal/IMG_4751.JPG.jpeg',
-    '/photos/bridal/IMG_4752.JPG.jpeg',
-    '/photos/bridal/IMG_4753.JPG.jpeg',
-    '/photos/bridal/IMG_4803.JPG.jpeg',
-    '/photos/bridal/IMG_4804.JPG.jpeg',
-    '/photos/bridal/IMG_4805.JPG.jpeg',
-    '/photos/bridal/IMG_4806.JPG.jpeg',
-    '/photos/bridal/IMG_4842.JPG.jpeg',
-    '/photos/bridal/IMG_5159.JPG.jpeg',
-    '/photos/bridal/IMG_5160.JPG.jpeg',
-    '/photos/bridal/IMG_5161.JPG.jpeg',
-    '/photos/bridal/IMG_5162.JPG.jpeg',
-    '/photos/bridal/IMG_5163.JPG.jpeg',
-    '/photos/bridal/IMG_5164.JPG.jpeg',
-    '/photos/bridal/IMG_5167.JPG.jpeg',
-    '/photos/bridal/IMG_5168.JPG.jpeg',
-  ], []);
-
-  const couplePhotos = useMemo(() => [
-    '/photos/couplePhotos/IMG_0879.JPG.jpeg',
-    '/photos/couplePhotos/IMG_0885.JPG.jpeg',
-    '/photos/couplePhotos/IMG_1848.JPG.jpeg',
-    '/photos/couplePhotos/IMG_2165.JPG.jpeg',
-    '/photos/couplePhotos/IMG_2166.JPG.jpeg',
-    '/photos/couplePhotos/IMG_2167.JPG.jpeg',
-    '/photos/couplePhotos/IMG_2169.JPG.jpeg',
-    '/photos/couplePhotos/IMG_2170.JPG.jpeg',
-    '/photos/couplePhotos/IMG_2172.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4145.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4147.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4249.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4250.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4259.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4264.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4276.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4288.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4348.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4372.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4373.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4375.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4376.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4378.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4379.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4380.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4381.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4382.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4383.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4791.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4844.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4846.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4854.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4855.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4867.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4950.JPG.jpeg',
-    '/photos/couplePhotos/IMG_4990.JPG.jpeg',
-    '/photos/couplePhotos/IMG_5065.JPG.jpeg',
-    '/photos/couplePhotos/IMG_5066.JPG.jpeg',
-  ], []);
-
-  const services = [
-    {
-      title: "Bridal Photography",
-      description: "Professional headshots and personal portraits",
-      icon: "👰"
-    },
-    {
-      title: "Couple Photography", 
-      description: "Capturing your special day with elegance",
-      icon: "💑"
-    },
-    {
-      title: "Product Photography",
-      description: "High-quality commercial product shots",
-      icon: "📦"
-    }
-  ];
-
-  const handleServiceClick = (serviceTitle: string) => {
-    try {
-      if (serviceTitle === "Bridal Photography" || serviceTitle === "Couple Photography") {
-        setSelectedService(serviceTitle);
-      }
-    } catch (error) {
-      console.error('Error opening gallery:', error);
-      // Fallback: try to open without animation
-      setSelectedService(serviceTitle);
-    }
-  };
-
-  // Memoized getCurrentPhotos function for performance
-  const getCurrentPhotos = useMemo(() => {
-    return () => {
-      if (selectedService === "Bridal Photography") return bridalPhotos;
-      if (selectedService === "Couple Photography") return couplePhotos;
-      return [];
-    };
-  }, [selectedService, bridalPhotos, couplePhotos]);
-
-  const photos = getCurrentPhotos();
-
-  const closeModal = () => {
-    try {
-      setSelectedService(null);
-      setVisibleImages(4); // Reset to 4 images when closing
-    } catch (error) {
-      console.error('Error closing modal:', error);
-      // Force close
-      setSelectedService(null);
-      setVisibleImages(4);
-    }
-  };
-
-  const loadMoreImages = () => {
-    setVisibleImages(prev => Math.min(prev + 4, photos.length));
-  };
-
-  // Keyboard navigation for ESC key only
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        closeModal();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
-  // Global context menu blocker when modal is open
-  useEffect(() => {
-    const handleContextMenu = (e: MouseEvent) => {
-      if (selectedService) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-      }
-    };
-
-    if (selectedService) {
-      document.addEventListener('contextmenu', handleContextMenu, true);
-      return () => {
-        document.removeEventListener('contextmenu', handleContextMenu, true);
-      };
-    }
-  }, [selectedService]);
-
-  // Body scroll lock when modal is open - Fixed for mobile reload
-  useEffect(() => {
-    let scrollY = 0;
-    
-    if (selectedService) {
-      // Store current scroll position
-      scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
-      
-      // Lock body scroll
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.left = '0';
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
-      
-      return () => {
-        // Restore body scroll with delay
-        setTimeout(() => {
-          document.body.style.position = '';
-          document.body.style.top = '';
-          document.body.style.left = '';
-          document.body.style.width = '';
-          document.body.style.overflow = '';
-          document.documentElement.style.overflow = '';
-          
-          // Restore scroll position safely
-          const targetY = parseInt(scrollY.toString()) || 0;
-          window.scrollTo(0, targetY);
-        }, 100); // Small delay to allow browser to settle
-      };
-    }
-  }, [selectedService]);
-
+const ServicesSection: React.FC = () => {
   return (
-    <>
-      <style>{`
-        .no-download {
-          -webkit-user-select: none !important;
-          -moz-user-select: none !important;
-          -ms-user-select: none !important;
-          user-select: none !important;
-          -webkit-touch-callout: none !important;
-          -webkit-tap-highlight-color: transparent !important;
-          pointer-events: none !important;
-        }
-        .protected-image {
-          -webkit-user-drag: none !important;
-          -khtml-user-drag: none !important;
-          -moz-user-drag: none !important;
-          -o-user-drag: none !important;
-          user-drag: none !important;
-        }
-        .mobile-scroll {
-          -webkit-overflow-scrolling: touch;
-          overflow-scrolling: touch;
-          -webkit-transform: translateZ(0);
-          transform: translateZ(0);
-          will-change: transform;
-        }
-        .photo-container {
-          pointer-events: none !important;
-          -webkit-user-select: none !important;
-          -moz-user-select: none !important;
-          -ms-user-select: none !important;
-          user-select: none !important;
-          -webkit-touch-callout: none !important;
-        }
-      `}</style>
-      
-      <section id="services" className={`min-h-screen py-20 px-4 ${isDarkMode ? 'bg-dark-bg' : 'bg-gray-100'}`}>
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className={`text-4xl md:text-5xl font-bold mb-4 font-display ${
-              isDarkMode ? 'text-white' : 'text-gray-900'
-            }`}>
-              Our Services
-            </h2>
-            <p className={`text-lg max-w-2xl mx-auto ${
-              isDarkMode ? 'text-gray-400' : 'text-gray-600'
-            }`}>
-              Professional photography services tailored to capture your most precious moments
-            </p>
-          </motion.div>
+    <section id="services" className="py-24 md:py-32 px-5 sm:px-8 bg-surface-soft">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true, margin: '-80px' }}
+          className="max-w-2xl mb-14 md:mb-20"
+        >
+          <div className="eyebrow mb-4">What We Do</div>
+          <h2 className="font-display text-4xl md:text-5xl font-semibold text-ink mb-5 leading-tight">
+            Our Services
+          </h2>
+          <div className="rule-gold mb-6" />
+          <p className="text-base md:text-lg text-ink-muted leading-relaxed">
+            Professional photography tailored to capture your most precious
+            moments — shot, edited and delivered by our team.
+          </p>
+        </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5 }}
-                onClick={() => handleServiceClick(service.title)}
-                className={`p-8 rounded-2xl backdrop-blur-md border ${
-                  isDarkMode 
-                    ? 'bg-gray-900/50 border-gray-800 hover:bg-gray-800/70' 
-                    : 'bg-white/70 border-gray-200 hover:bg-white/90'
-                } transition-all duration-300 cursor-pointer`}
-              >
-                <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className={`text-xl font-bold mb-3 ${
-                  isDarkMode ? 'text-white' : 'text-gray-900'
-                }`}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {services.map((service, index) => (
+            <motion.article
+              key={service.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: index * 0.08 }}
+              viewport={{ once: true, margin: '-60px' }}
+              className="flex flex-col rounded-2xl overflow-hidden bg-white border border-surface-border shadow-card"
+            >
+              {/* Cover */}
+              <div className="relative overflow-hidden bg-gold-50">
+                {service.cover ? (
+                  <img
+                    src={`${service.cover}-560.jpg`}
+                    srcSet={`${service.cover}-560.jpg 560w, ${service.cover}-1000.jpg 1000w`}
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    alt={service.title}
+                    loading="lazy"
+                    decoding="async"
+                    draggable={false}
+                    className="w-full aspect-[4/3] object-cover"
+                  />
+                ) : (
+                  <div className="w-full aspect-[4/3] flex items-center justify-center">
+                    <i className="fas fa-box-open text-4xl text-gold-300" />
+                  </div>
+                )}
+              </div>
+
+              {/* Body */}
+              <div className="flex flex-col flex-grow p-6 md:p-7">
+                <h3 className="font-display text-xl font-semibold text-ink mb-3">
                   {service.title}
                 </h3>
-                <p className={`${
-                  isDarkMode ? 'text-gray-400' : 'text-gray-600'
-                }`}>
+                <p className="text-sm text-ink-muted leading-relaxed mb-5">
                   {service.description}
                 </p>
-                {(service.title === "Bridal Photography" || service.title === "Couple Photography") && (
-                  <div className={`mt-4 text-sm ${
-                    isDarkMode ? 'text-blue-400' : 'text-blue-600'
-                  }`}>
-                    Click to view gallery
-                  </div>
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery Modal */}
-      <AnimatePresence>
-        {selectedService && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-2 sm:p-4"
-            onClick={closeModal}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative max-w-7xl w-full h-[80vh] sm:h-[85vh] md:max-h-[90vh] bg-black rounded-lg overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Header */}
-              <div className="flex items-center justify-between p-4 border-b border-gray-700">
-                <h3 className={`text-xl font-bold text-white`}>
-                  {selectedService} Gallery ({photos.length} photos)
-                </h3>
-                <div className="flex items-center space-x-4">
-                  <div className="text-xs text-gray-400">
-                    ESC to close
-                  </div>
-                  <button
-                    onClick={closeModal}
-                    className="bg-red-500 hover:bg-red-600 text-white rounded-full p-2 w-10 h-10 flex items-center justify-center transition-colors text-lg font-bold"
-                  >
-                    ×
-                  </button>
-                </div>
-              </div>
-
-              {/* Photo Grid */}
-              <div className="p-3 sm:p-4 overflow-y-auto h-[50vh] sm:h-[60vh] md:max-h-[60vh] mobile-scroll">
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
-                  {photos.slice(0, visibleImages).map((photo: string, index: number) => (
-                    <motion.div
-                      key={photo} // Use photo URL as key for better React performance
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3, delay: Math.min(index * 0.02, 0.1) }} // Cap delay for better UX
-                      whileHover={{ scale: 1.02 }}
-                      className="relative aspect-square rounded-lg overflow-hidden cursor-pointer group photo-container"
-                      style={{ willChange: 'transform' }} // GPU acceleration
-                      onContextMenu={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                      }}
-                      onDragStart={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                      }}
-                    >
-                      <OptimizedImage
-                        src={photo}
-                        alt={`${selectedService} ${index + 1}`}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 protected-image"
-                      />
-                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-                        <div className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center">
-                          <div className="text-lg font-bold">#{index + 1}</div>
-                        </div>
-                      </div>
-                      
-                      {/* Watermark overlay */}
-                      <div className="absolute top-2 right-2 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded pointer-events-none">
-                        HK Production
-                      </div>
-                    </motion.div>
+                <ul className="space-y-2 mt-auto">
+                  {service.points.map((point) => (
+                    <li key={point} className="flex items-start gap-2.5 text-sm text-ink-muted">
+                      <i className="fas fa-check text-[10px] text-gold-500 mt-1.5" />
+                      <span>{point}</span>
+                    </li>
                   ))}
-                </div>
-                
-                {/* Load More Button */}
-                {visibleImages < photos.length && (
-                  <div className="flex justify-center mt-6">
-                    <motion.button
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      onClick={loadMoreImages}
-                      className={`px-6 py-3 rounded-lg font-medium transition-colors ${
-                        isDarkMode 
-                          ? 'bg-blue-600 hover:bg-blue-700 text-white' 
-                          : 'bg-blue-500 hover:bg-blue-600 text-white'
-                      }`}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Load More Photos ({photos.length - visibleImages} remaining)
-                    </motion.button>
-                  </div>
-                )}
+                </ul>
               </div>
-
-              {/* Footer */}
-              <div className="p-4 border-t border-gray-700 text-center">
-                <p className="text-gray-400 text-sm">
-                  Total: {photos.length} {selectedService.toLowerCase()} photos
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 

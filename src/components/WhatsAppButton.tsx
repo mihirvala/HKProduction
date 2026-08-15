@@ -1,34 +1,25 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-interface WhatsAppButtonProps {
-  isDarkMode: boolean;
-}
-
-const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({ isDarkMode }) => {
+const WhatsAppButton: React.FC = () => {
   const openWhatsApp = () => {
-    const phoneNumber = '+917778979768';
-    const message = encodeURIComponent('Hi, I\'m interested in your photography services');
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    const message = encodeURIComponent("Hi, I'm interested in your photography services");
+    window.open(`https://wa.me/917778979768?text=${message}`, '_blank', 'noopener');
   };
 
   return (
-    <motion.div
+    <motion.button
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 0.5, delay: 2 }}
-      className="fixed bottom-6 right-6 z-50"
+      transition={{ duration: 0.4, delay: 1.4 }}
+      onClick={openWhatsApp}
+      whileHover={{ scale: 1.06 }}
+      whileTap={{ scale: 0.94 }}
+      className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg shadow-[#25D366]/30 hover:brightness-95 transition"
+      aria-label="Contact us on WhatsApp"
     >
-      <motion.button
-        onClick={openWhatsApp}
-        className="w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors icon-button"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        title="Contact us on WhatsApp"
-      >
-        <i className="fab fa-whatsapp text-2xl"></i>
-      </motion.button>
-    </motion.div>
+      <i className="fab fa-whatsapp text-2xl" />
+    </motion.button>
   );
 };
 

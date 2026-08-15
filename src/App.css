@@ -1,71 +1,70 @@
-/* Custom styles for CUBE³ GALLERY */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* HK Production — light theme utilities */
 
 body {
   overflow-x: hidden;
 }
 
-/* Canvas container styles */
-canvas {
-  display: block;
-}
-
-/* Custom scrollbar */
+/* Custom scrollbar tuned for the white theme */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #FAF8F4;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4a4a4a;
-  border-radius: 4px;
+  background: #DCD5C8;
+  border-radius: 6px;
+  border: 2px solid #FAF8F4;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6a6a6a;
+  background: #C7A04F;
 }
 
-/* Font display utilities */
+/* Font display utility */
 .font-display {
-  font-family: 'Montserrat', system-ui, sans-serif;
+  font-family: 'Playfair Display', Georgia, serif;
 }
 
-/* Glassmorphism effect */
-.glass {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+/* Small uppercase label above section headings */
+.eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #946E26;
 }
 
-/* Smooth transitions */
-.transition-all {
-  transition: all 0.3s ease;
+/* Thin gold rule used under section headings */
+.rule-gold {
+  width: 3rem;
+  height: 1px;
+  background: #C7A04F;
 }
 
-/* SVG Icon Styles */
+/* Visible focus ring for keyboard users */
+:focus-visible {
+  outline: 2px solid #B08830;
+  outline-offset: 2px;
+}
+
+/* Font Awesome glyphs must not be stretched by the global svg rule below */
+i.fas,
+i.fab,
+i.far {
+  display: inline-block;
+  line-height: 1;
+}
+
+/* Inline SVG icons default to filling their box */
 svg {
   display: block;
-  width: 100%;
-  height: 100%;
   fill: currentColor;
 }
 
-/* Ensure proper icon display */
 .icon-button svg {
   width: 20px;
   height: 20px;
-  display: block;
-}
-
-.icon-button-small svg {
-  width: 16px;
-  height: 16px;
-  display: block;
 }
