@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
   };
 
   const openInstagram = () => {
-    window.open('https://instagram.com/hk_weddingstudio', '_blank', 'noopener');
+    window.open('https://instagram.com/hk.weddingfilms', '_blank', 'noopener');
   };
 
   return (
