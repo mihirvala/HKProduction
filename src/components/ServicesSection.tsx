@@ -83,6 +83,7 @@ const ServicesSection: React.FC = () => {
                     loading="lazy"
                     decoding="async"
                     draggable={false}
+                    onContextMenu={(e) => e.preventDefault()}
                     className="w-full aspect-[4/3] object-cover"
                   />
                 ) : (

@@ -168,7 +168,9 @@ export const GalleryLightbox: React.FC<GalleryLightboxProps> = ({
               src={photo.thumbUrl}
               alt=""
               aria-hidden="true"
-              className="max-h-[80vh] max-w-[90vw] object-contain filter blur-md scale-98 transition-all"
+              draggable={false}
+              onContextMenu={(e) => e.preventDefault()}
+              className="max-h-[80vh] max-w-[90vw] object-contain filter blur-md scale-98 transition-all pointer-events-none"
             />
           )}
 
@@ -186,6 +188,14 @@ export const GalleryLightbox: React.FC<GalleryLightboxProps> = ({
             className={`max-h-[82vh] max-w-[92vw] object-contain rounded-lg shadow-2xl transition-opacity duration-300 ${
               isFullLoaded ? 'relative' : 'absolute'
             }`}
+          />
+
+          {/* Transparent protection shield layer over the active photo */}
+          <div
+            className="protection-shield pointer-events-auto"
+            onContextMenu={(e) => e.preventDefault()}
+            onDragStart={(e) => e.preventDefault()}
+            aria-hidden="true"
           />
         </div>
 

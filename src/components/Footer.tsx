@@ -100,9 +100,20 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="pt-7 border-t border-surface-border flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="pt-7 border-t border-surface-border flex flex-col items-center justify-center text-center gap-1.5">
           <p className="text-xs text-ink-light">
             © {new Date().getFullYear()} HK Production. All rights reserved.
+          </p>
+          <p className="text-xs text-ink-light">
+            Created by{' '}
+            <a
+              href="https://www.instagram.com/mihirvala23"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold-600 hover:text-gold-700 font-medium transition-colors"
+            >
+              mihirvala23
+            </a>
           </p>
         </div>
       </div>

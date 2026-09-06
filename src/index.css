@@ -37,3 +37,29 @@ code {
     scroll-behavior: auto;
   }
 }
+
+/* ==========================================================================
+   Image & Content Protection (Mobile, Tablet, Laptop, Desktop)
+   ========================================================================== */
+img, picture, video, canvas, [data-protected="true"] {
+  -webkit-touch-callout: none !important; /* Disables iOS / Android long-press save menu */
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;    /* Disables dragging image to desktop / folders */
+  user-drag: none !important;
+}
+
+/* Protective transparent shield layer */
+.protection-shield {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: transparent;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+  user-drag: none !important;
+}

@@ -71,6 +71,8 @@ const HeroSection: React.FC = () => {
           className="w-full h-full object-cover"
           fetchPriority="high"
           decoding="async"
+          draggable={false}
+          onContextMenu={(e) => e.preventDefault()}
         />
       </picture>
 
