@@ -1,11 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const WHATSAPP_URL =
   'https://wa.me/917778979768?text=' +
   encodeURIComponent("Hi, I'm interested in your photography services");
 
+const headlines = [
+  'Moments Captured for a Lifetime',
+  'Crafting Timeless Wedding Stories',
+  'Timeless Love, Artfully Captured',
+  'Where Every Love Story Begins'
+];
+
 const HeroSection: React.FC = () => {
+  const [displayedText, setDisplayedText] = useState('');
+  const [headlineIndex, setHeadlineIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentHeadline = headlines[headlineIndex];
+    let timer: ReturnType<typeof setTimeout>;
+
+    if (!isDeleting && displayedText === currentHeadline) {
+      // Completed full sentence — pause so visitor can read
+      timer = setTimeout(() => {
+        setIsDeleting(true);
+      }, 2600);
+    } else if (isDeleting && displayedText === '') {
+      // Finished backspacing — pause briefly then start next sentence
+      timer = setTimeout(() => {
+        setIsDeleting(false);
+        setHeadlineIndex((prev) => (prev + 1) % headlines.length);
+      }, 400);
+    } else {
+      // Typing next character or backspacing
+      const speed = isDeleting ? 30 : 65;
+      timer = setTimeout(() => {
+        setDisplayedText((prev) =>
+          isDeleting
+            ? currentHeadline.substring(0, prev.length - 1)
+            : currentHeadline.substring(0, prev.length + 1)
+        );
+      }, speed);
+    }
+
+    return () => clearTimeout(timer);
+  }, [displayedText, isDeleting, headlineIndex]);
+
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -52,13 +93,19 @@ const HeroSection: React.FC = () => {
             </span>
           </div>
 
-          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-semibold text-white leading-[1.05] mb-5">
-            HK Production
-          </h1>
+          <div className="min-h-[85px] sm:min-h-[95px] md:min-h-[120px] flex items-start mb-5">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white leading-[1.15] tracking-tight">
+              <span>{displayedText}</span>
+              <span
+                className="inline-block w-[2.5px] sm:w-[3px] md:w-[4px] h-[0.82em] bg-gold-400 ml-1.5 align-baseline animate-pulse shadow-[0_0_8px_rgba(217,188,124,0.75)]"
+                aria-hidden="true"
+              />
+            </h1>
+          </div>
 
           <p className="text-base md:text-lg text-white/80 max-w-xl mb-9 leading-relaxed">
-            Capturing moments that tell timeless stories — bridal, couple and
-            candid photography across India.
+            Bridal, couple and candid wedding photography across India — capturing
+            every precious emotion with artistry and elegance.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">

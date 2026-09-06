@@ -27,11 +27,12 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 pb-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2.5 mb-4">
-              <i className="fas fa-camera text-gold-500" />
-              <span className="font-display text-lg font-semibold text-ink">
-                HK Production
-              </span>
+            <div className="flex items-center gap-3 mb-4">
+              <img
+                src="/logo.png"
+                alt="HK Production"
+                className="h-12 w-auto object-contain"
+              />
             </div>
             <p className="text-sm text-ink-muted leading-relaxed max-w-xs">
               Capturing timeless wedding stories with artistry and precision.

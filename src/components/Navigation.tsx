@@ -40,31 +40,30 @@ const Navigation: React.FC = () => {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-          solid
+        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${solid
             ? 'bg-white/95 backdrop-blur-md border-b border-surface-border shadow-nav'
             : 'bg-transparent border-b border-transparent'
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Wordmark */}
+            {/* Brand / Logo */}
             <button
               onClick={() => handleNavClick('Home')}
               className="flex items-center gap-2.5 group"
               aria-label="HK Production — back to top"
             >
-              <i
-                className={`fas fa-camera text-base transition-colors duration-300 ${
-                  solid ? 'text-gold-500' : 'text-white'
-                }`}
+              <img
+                src="/logo-icon.png"
+                alt="HK"
+                className="h-8 md:h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
               <span
                 className={`font-display text-lg md:text-xl font-semibold tracking-tight transition-colors duration-300 ${
-                  solid ? 'text-ink' : 'text-white'
+                  solid ? 'text-gold-600' : 'text-gold-400'
                 }`}
               >
-                HK Production
+                Production
               </span>
             </button>
 
@@ -74,20 +73,18 @@ const Navigation: React.FC = () => {
                 <button
                   key={item}
                   onClick={() => handleNavClick(item)}
-                  className={`relative text-sm font-medium transition-colors duration-200 after:absolute after:left-0 after:-bottom-1.5 after:h-px after:w-0 after:bg-gold-500 after:transition-all after:duration-300 hover:after:w-full ${
-                    solid ? 'text-ink-muted hover:text-ink' : 'text-white/85 hover:text-white'
-                  }`}
+                  className={`relative text-sm font-medium transition-colors duration-200 after:absolute after:left-0 after:-bottom-1.5 after:h-px after:w-0 after:bg-gold-500 after:transition-all after:duration-300 hover:after:w-full ${solid ? 'text-ink-muted hover:text-ink' : 'text-white/85 hover:text-white'
+                    }`}
                 >
                   {item}
                 </button>
               ))}
               <button
                 onClick={() => handleNavClick('Contact')}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                  solid
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${solid
                     ? 'bg-gold-500 text-white hover:bg-gold-600'
                     : 'bg-white/95 text-ink hover:bg-white'
-                }`}
+                  }`}
               >
                 Book Now
               </button>
@@ -96,9 +93,8 @@ const Navigation: React.FC = () => {
             {/* Mobile menu toggle */}
             <button
               onClick={() => setIsMenuOpen((open) => !open)}
-              className={`md:hidden w-10 h-10 -mr-2 flex items-center justify-center transition-colors duration-300 ${
-                solid ? 'text-ink' : 'text-white'
-              }`}
+              className={`md:hidden w-10 h-10 -mr-2 flex items-center justify-center transition-colors duration-300 ${solid ? 'text-ink' : 'text-white'
+                }`}
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMenuOpen}
             >
