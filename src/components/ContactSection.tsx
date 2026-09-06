@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const PHONE = '917778979768';
-const EMAIL = 'patelkuldip379@gmail.com';
+const EMAIL = 'hkproduction379@gmail.com';
 
 const inputClass =
   'w-full px-4 py-3 rounded-xl border border-surface-border bg-white text-ink text-sm placeholder:text-ink-light focus:outline-none focus:border-gold-400 focus:ring-2 focus:ring-gold-200 transition-colors';

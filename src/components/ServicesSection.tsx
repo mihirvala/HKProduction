@@ -1,26 +1,43 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const services = [
+type ServiceData = {
+  title: string;
+  description: string;
+  points: string[];
+  cover: string | null;
+  // fallback panel props (only used when cover is null)
+  icon?: string;
+  bgColor?: string;
+  hatching?: string;
+  iconBg?: string;
+  iconBorder?: string;
+  iconColor?: string;
+  labelColor?: string;
+  accentColor?: string;
+  label?: string;
+};
+
+const services: ServiceData[] = [
   {
     title: 'Bridal Photography',
     description:
       'Portrait sessions that hold the detail of the day — the jewellery, the mehndi, the quiet moment before it all begins.',
-    cover: '/portfolio/bridal-garden',
+    cover: '/services-bridal.jpg',
     points: ['Traditional & candid portraits', 'Studio and on-location', 'Retouched and album ready']
   },
   {
     title: 'Couple Photography',
     description:
       'Candid and cinematic coverage of the two of you, from the pre-wedding shoot through to the last dance.',
-    cover: '/portfolio/couple-peach',
+    cover: '/services-couple.jpg',
     points: ['Pre-wedding shoots', 'Cinematic highlights & teaser', 'Drone coverage available']
   },
   {
     title: 'Product Photography',
     description:
       'Clean, commercial product shots for catalogues, listings and campaigns — styled, lit and retouched in studio.',
-    cover: null,
+    cover: '/services-product.jpg',
     points: ['Catalogue & listing images', 'Styled studio lighting', 'Bulk shoot pricing']
   }
 ];
@@ -58,12 +75,10 @@ const ServicesSection: React.FC = () => {
               className="flex flex-col rounded-2xl overflow-hidden bg-white border border-surface-border shadow-card"
             >
               {/* Cover */}
-              <div className="relative overflow-hidden bg-gold-50">
+              <div className="relative overflow-hidden">
                 {service.cover ? (
                   <img
-                    src={`${service.cover}-560.jpg`}
-                    srcSet={`${service.cover}-560.jpg 560w, ${service.cover}-1000.jpg 1000w`}
-                    sizes="(min-width: 768px) 33vw, 100vw"
+                    src={service.cover}
                     alt={service.title}
                     loading="lazy"
                     decoding="async"
@@ -71,25 +86,22 @@ const ServicesSection: React.FC = () => {
                     className="w-full aspect-[4/3] object-cover"
                   />
                 ) : (
-                  // No product photographs to show yet — a designed panel reads as a
-                  // deliberate choice, where a bare icon reads as a broken image.
-                  <div className="relative w-full aspect-[4/3] flex flex-col items-center justify-center gap-3 bg-gold-50 overflow-hidden">
-                    {/* faint diagonal hatching for texture */}
+                  <div className={`relative w-full aspect-[4/3] flex flex-col items-center justify-center gap-3 ${service.bgColor} overflow-hidden`}>
                     <div
                       className="absolute inset-0 opacity-[0.5]"
                       style={{
                         backgroundImage:
-                          'repeating-linear-gradient(45deg, transparent 0 10px, rgba(199,160,79,0.10) 10px 11px)'
+                          `repeating-linear-gradient(45deg, transparent 0 10px, ${service.hatching} 10px 11px)`
                       }}
                       aria-hidden="true"
                     />
-                    <span className="relative w-14 h-14 rounded-full bg-white/70 border border-gold-200 flex items-center justify-center">
-                      <i className="fas fa-camera-retro text-xl text-gold-500" />
+                    <span className={`relative w-14 h-14 rounded-full ${service.iconBg} border ${service.iconBorder} flex items-center justify-center`}>
+                      <i className={`${service.icon} text-xl ${service.iconColor}`} />
                     </span>
-                    <span className="relative text-[11px] font-semibold uppercase tracking-eyebrow text-gold-600">
-                      Samples on request
+                    <span className={`relative text-[11px] font-semibold uppercase tracking-eyebrow ${service.labelColor}`}>
+                      {service.label}
                     </span>
-                    <span className="relative w-8 h-px bg-gold-300" aria-hidden="true" />
+                    <span className={`relative w-8 h-px ${service.accentColor}`} aria-hidden="true" />
                   </div>
                 )}
               </div>
@@ -120,3 +132,4 @@ const ServicesSection: React.FC = () => {
 };
 
 export default ServicesSection;
+

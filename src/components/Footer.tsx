@@ -1,7 +1,7 @@
 import React from 'react';
 
 const PHONE = '917778979768';
-const EMAIL = 'patelkuldip379@gmail.com';
+const EMAIL = 'hkproduction379@gmail.com';
 
 const quickLinks = [
   { name: 'Home', href: '#home' },
@@ -103,7 +103,6 @@ const Footer: React.FC = () => {
           <p className="text-xs text-ink-light">
             © {new Date().getFullYear()} HK Production. All rights reserved.
           </p>
-          <p className="text-xs text-ink-light">Created by Mihir Vala</p>
         </div>
       </div>
     </footer>
